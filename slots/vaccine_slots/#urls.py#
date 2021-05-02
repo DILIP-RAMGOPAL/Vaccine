@@ -1,0 +1,36 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.data),
+]
+
+
+
+
+    from_email = "dilipdrg@gmail.com"
+    names = ['dilip'] 
+    emails = ['dilip.ramgopal.98@gmail.com']
+    # set up the SMTP server
+    s = smtplib.SMTP(host='smtp.gmail.com', port=587)
+    s.starttls()
+    s.login('dilipdrg@gmail.com', 'Dillurocks@123')
+
+    # For each contact, send the email:
+    for name, email in zip(names, emails):
+        msg = MIMEMultipart()       # create a message
+        # setup the parameters of the message
+        msg['From']=name
+        msg['To']=email
+        msg['Subject']="This is TEST"
+        
+        # add in the message body
+        msg.attach(MIMEText(message, 'plain'))
+        
+        # send the message via the server set up earlier.
+        s.send_message(msg)
+        del msg
+        
+    # Terminate the SMTP session and close the connection
+    s.quit()
+
